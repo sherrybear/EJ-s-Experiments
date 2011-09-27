@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Inequality in America</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="raphael-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="g.raphael.js" type="text/javascript" charset="utf-8"></script>
+	<script src="g.bar-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="g.pie-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="g.dot-min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="g.line-min.js" type="text/javascript" charset="utf-8"></script>
+	
+	<style type="text/css" media="screen">
+/*		body {
+			font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+		}
+		
+		#container {
+			width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		.graph {
+			background-color: #E1E1E1;
+		}*/
+	</style>
+	<script src="data.json" type="text/javascript" charset="utf-8"></script>
+	
+</head>
+<body>
+<div id="container">
+	<div id="header">
+		<h1>Inequality in America</h1>
+	</div>
+	
+	<div id="ceo-pay" class="section">
+		<h3>CEO pay in relation to average worker's pay</h3>
+
+		<div id="ceo-pay-graph" class="graph">
+
+		</div>
+		<a href="#" onclick="goawayaxis();">No axis</a>
+		
+	</div>
+</div>
+<script type="text/javascript" charset="utf-8">
+	Array.max = function( array ){
+	        return Math.max.apply( Math, array );
+	    };
+
+	    // Function to get the Min value in Array
+	    Array.min = function( array ){
+	       return Math.min.apply( Math, array );
+	    };
+</script>
+
+<script type="text/javascript" charset="utf-8">
+var paperwidth = 800;
+
+var r = Raphael("ceo-pay-graph", paperwidth, 320);
+
+// Add labels on rollover
+
+fin = function () {
+	//	console.log("ID: "+this.bar.id + " Year: " + data[this.bar.id].Date);		
+	var tag_copy = data[this.bar.id].Date + " \n Ratio: " + data[this.bar.id].Ratio;
+	
+//	this.flag = r.g.flag(this.bar.x, this.bar.y+5, tag_copy || "0").insertBefore(this);
+	
+	this.flag = r.g.flag(this.bar.x, 285, tag_copy || "0").insertBefore(this);
+}
+
+// Remove labels when mouse moves away
+fout = function () {
+	this.flag.animate({opacity: 0}, 100, function () {this.remove();});
+}
+
+
+// Modify data so Raphael will like it
+var ratio = [];
+for (var i=0; i < data.length; i++) {
+	ratio[i] = parseFloat(data[i].Ratio);
+};
+ratio = [ratio];
+
+// Send the data to the console for debugging purposes
+console.log(ratio + " Length: " + ratio[0].length);
+
+// Actually make the bar chart
+var hbarchart = r.g.barchart(50, 10, 700, 300, ratio).hover(fin, fout);
+
+// Make it so that if you click on a bar, a label stays until you click on it again
+hbarchart.click(function (event) {
+
+	var tag_copy = data[this.bar.id].Date + " \n Ratio: " + data[this.bar.id].Ratio;
+	
+	if(this.tempflag != null){
+		this.tempflag.animate({opacity: 0}, 100, function () {this.remove();});	
+	}
+	else {
+		this.tempflag = r.g.tag(this.bar.x, this.bar.y+5, tag_copy || "0").insertBefore(this);
+	}
+})
+
+
+
+$.each(hbarchart[1], function(index, value) {
+//	console.log(this[0]);
+})
+
+// Label the years, by hand, hacky. 
+var yearlabel1 = r.text(590, 300, "2000");
+
+var yearlabel2 = r.text(440, 300, "1990");
+
+var yearlabel3 = r.text(63, 300, "1965");
+
+var dashsize =  340;
+var x_start = dashsize+50;
+var y_start = 290;
+var x_width = 300;
+var from = 0;
+var to = Array.max(ratio[0]);
+var steps = 8;
+var orientation = 1;
+var labels = null;
+var type =  "|";
+
+axis = r.g.axis(x_start, y_start, x_width, from, to, steps, orientation, labels, type, dashsize);
+
+function goawayaxis() {
+	axis.animate({opacity: 0}, 500, function () {this.remove();});	
+}
+
+//axis = r.g.axis(50,300,300,1,150,20,1,null, "|", 0);
+
+
+</script>
+</body>
+</html>

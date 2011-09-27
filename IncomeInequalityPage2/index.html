@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Inequality in America</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js" type="text/javascript" charset="utf-8"></script>	
+	
+	<script src="d3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.chart.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="d3.time.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.layout.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.geom.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="https://raw.github.com/bigmlcom/tipsy/master/src/javascripts/jquery.tipsy.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="tipsy/stylesheets/tipsy.css" type="text/css" media="screen" title="Tipsy" charset="utf-8">
+	
+	
+	<style type="text/css" media="screen">
+		body {
+			font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+		}
+		
+		#container {
+			width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		
+		#graph {
+			width: 800;
+			background-color: #E1E1E1;
+		}
+		
+		 .chart div {
+		   font: 10px sans-serif;
+		   background-color: steelblue;
+		   text-align: right;
+		   padding: 3px;
+		   margin: 1px;
+		   color: white;
+		 }
+		
+		.chart rect {
+			stroke: white;
+		}
+	</style>
+	
+	
+	<script type="text/javascript" charset="utf-8">
+	var jsondata = [
+		{
+			"Date": 1965,
+			"Ratio": "24.2"
+		},
+		{
+			"Date": 1966,
+			"Ratio": "25.6"
+		},
+		{
+			"Date": 1967,
+			"Ratio": "27"
+		},
+		{
+			"Date": 1968,
+			"Ratio": "28.6"
+		},
+		{
+			"Date": 1969,
+			"Ratio": "28.2"
+		},
+		{
+			"Date": 1970,
+			"Ratio": "27.7"
+		},
+		{
+			"Date": 1971,
+			"Ratio": "27.3"
+		},
+		{
+			"Date": 1972,
+			"Ratio": "26.9"
+		},
+		{
+			"Date": 1973,
+			"Ratio": "26.5"
+		},
+		{
+			"Date": 1974,
+			"Ratio": "28"
+		},
+		{
+			"Date": 1975,
+			"Ratio": "29.6"
+		},
+		{
+			"Date": 1976,
+			"Ratio": "31.3"
+		},
+		{
+			"Date": 1977,
+			"Ratio": "33.1"
+		},
+		{
+			"Date": 1978,
+			"Ratio": "34.9"
+		},
+		{
+			"Date": 1979,
+			"Ratio": "37.2"
+		},
+		{
+			"Date": 1980,
+			"Ratio": "39.7"
+		},
+		{
+			"Date": 1981,
+			"Ratio": "42.3"
+		},
+		{
+			"Date": 1982,
+			"Ratio": "45"
+		},
+		{
+			"Date": 1983,
+			"Ratio": "48"
+		},
+		{
+			"Date": 1984,
+			"Ratio": "51.2"
+		},
+		{
+			"Date": 1985,
+			"Ratio": "54.5"
+		},
+		{
+			"Date": 1986,
+			"Ratio": "58.1"
+		},
+		{
+			"Date": 1987,
+			"Ratio": "61.9"
+		},
+		{
+			"Date": 1988,
+			"Ratio": "66"
+		},
+		{
+			"Date": 1989,
+			"Ratio": "70.4"
+		},
+		{
+			"Date": 1990,
+			"Ratio": "85.3"
+		},
+		{
+			"Date": 1991,
+			"Ratio": "103.5"
+		},
+		{
+			"Date": 1992,
+			"Ratio": "125.6"
+		},
+		{
+			"Date": 1993,
+			"Ratio": "116.5"
+		},
+		{
+			"Date": 1994,
+			"Ratio": "108"
+		},
+		{
+			"Date": 1995,
+			"Ratio": "100.2"
+		},
+		{
+			"Date": 1996,
+			"Ratio": "125.6"
+		},
+		{
+			"Date": 1997,
+			"Ratio": "157.4"
+		},
+		{
+			"Date": 1998,
+			"Ratio": "197.3"
+		},
+		{
+			"Date": 1999,
+			"Ratio": "247.2"
+		},
+		{
+			"Date": 2000,
+			"Ratio": "298.5"
+		},
+		{
+			"Date": 2001,
+			"Ratio": "235.4"
+		},
+		{
+			"Date": 2002,
+			"Ratio": "142.8"
+		},
+		{
+			"Date": 2003,
+			"Ratio": "180.6"
+		},
+		{
+			"Date": 2004,
+			"Ratio": "238.5"
+		},
+		{
+			"Date": 2005,
+			"Ratio": "264.1"
+		},
+		{
+			"Date": 2006,
+			"Ratio": "273.6"
+		},
+		{
+			"Date": 2007,
+			"Ratio": "277.3"
+		},
+		{
+			"Date": 2008,
+			"Ratio": "240.5"
+		},
+		{
+			"Date": 2009,
+			"Ratio": "185.3"
+		}
+	]
+	</script>
+
+</head>
+<body>
+<div id="container">
+	<div id="graph">
+		
+	</div>
+	
+	<a href="#" title="Test tipsy!" id="testtipsy">Testing</a>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+	
+	// Is tipsy working? 
+	$('#testtipsy').tipsy();
+	$('#graph').tipsy;
+	var data = [];
+	
+	for (var i=0; i < jsondata.length; i++) {
+		data[i] = parseFloat(jsondata[i].Ratio);
+	};
+	
+	console.log(data);
+	
+	var cwidth = 800;
+	var width = cwidth - (leftmargin + rightmargin);
+	var cheight = 450;
+	var barwidth = 10;
+	var barmargin = 3;
+	var rightmargin = 20;
+	var leftmargin = 50;
+	var topmargin = 10;
+	var ticks = 11;
+	
+	
+	 var chart = d3.select("#graph")
+	   .append("svg:svg")
+	     .attr("class", "chart")
+		 .attr("width", cwidth)
+		 .attr("height", cheight+50);
+	
+	 var barheight = d3.scale.linear()
+	     .domain([0, d3.max(data)])
+	     .range([0, cheight-topmargin]);
+	
+	 var barwidthscale = d3.scale.linear()
+	     .domain([0, data.length])
+		
+		
+    y = d3.scale.ordinal()
+		.domain(d3.range(data.length))
+		.rangeBands([leftmargin, cwidth-rightmargin], 0.1);	    
+	
+		// Create axis lines
+		chart.selectAll("line")
+			.data(barheight.ticks(ticks))
+		.enter().append("svg:line")
+			.attr("y1", barheight)
+			.attr("y2", barheight)
+			.attr("x1", 0)
+			.attr("x2", cwidth)
+			.attr("stroke", "#999");
+		
+		// Create bars
+		 chart.selectAll("rect")
+	        .data(data)
+	      .enter().append("svg:rect")
+		
+	        .attr("x", function(d, i) { 
+				//console.log("D: "+d+" I: "+i);
+				return y(i);// * (barwidth + barmargin); 
+			})
+			.attr("y", function(d, i) { return cheight - barheight(d); })
+	        .attr("width", y.rangeBand())
+			.attr("stroke", "none")
+			.attr("fill", function(d, i){ 
+				
+				//console.log(parseFloat(jsondata[i].Date));
+				//console.log(d3.range(1989,1999));
+				
+				
+				if(jsondata[i].Date <= 1990) {
+					return '#999';
+				}
+				if(jsondata[i].Date >= 2000) {
+					return 'blue';
+				}
+			})
+			.attr("title", function(d,i){
+				return "Date: "+jsondata[i].Date+" Ratio: "+jsondata[i].Ratio;
+			})
+			.text("Test!")
+			.attr("height", barheight);
+			
+		// Create axis labels
+		 chart.selectAll("text.rule")
+		     .data(barheight.ticks(ticks))
+		   .enter().append("svg:text")
+		     .attr("class", "rule")
+		     .attr("x", 5)
+	//	     .attr("y", barheight)
+			 .attr("y", function(d, i) { return ((cheight - topmargin) - barheight(d))+4; })
+		     .attr("dx", 12)
+			 .attr("dy", -5)
+		     .attr("text-anchor", "left")
+		     .text(String);
+	        
+	
+</script>
+
+</body>
+</html>
