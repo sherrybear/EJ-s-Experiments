@@ -16,6 +16,7 @@
 	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="https://raw.github.com/bigmlcom/tipsy/master/src/javascripts/jquery.tipsy.js" type="text/javascript" charset="utf-8"></script>
+	
 	<link rel="stylesheet" href="tipsy/stylesheets/tipsy.css" type="text/css" media="screen" title="Tipsy" charset="utf-8">
 	
 	
@@ -45,7 +46,6 @@
 		 }
 		
 		.chart rect {
-			stroke: white;
 		}
 	</style>
 	
@@ -234,7 +234,19 @@
 		}
 	]
 	</script>
-
+	
+	<script type="text/javascript">
+    $(document).ready(function() {
+      $('svg title').parent().tipsy({
+//      gravity: $.fn.tipsy.autoNS,
+		gravity: 'n',
+		delayIn: 300,
+        hoverlock:true,
+        html: true,
+    //    title: function() { return $(this).find('title').text(); }
+      });
+    });
+    </script>
 </head>
 <body>
 <div id="container">
@@ -242,13 +254,14 @@
 		
 	</div>
 	
-	<a href="#" title="Test tipsy!" id="testtipsy">Testing</a>
+	<a href="#" title="Test tipsy!" id="testtipsy">Testing tipsy</a>
 </div>
 
 <script type="text/javascript" charset="utf-8">
 	
 	// Is tipsy working? 
 	$('#testtipsy').tipsy();
+	
 	$('#graph').tipsy;
 	var data = [];
 	
@@ -273,7 +286,7 @@
 	   .append("svg:svg")
 	     .attr("class", "chart")
 		 .attr("width", cwidth)
-		 .attr("height", cheight+50);
+		 .attr("height", cheight+75);
 	
 	 var barheight = d3.scale.linear()
 	     .domain([0, d3.max(data)])
@@ -285,7 +298,7 @@
 		
     y = d3.scale.ordinal()
 		.domain(d3.range(data.length))
-		.rangeBands([leftmargin, cwidth-rightmargin], 0.1);	    
+		.rangeBands([leftmargin, cwidth-rightmargin], 0.2);	    
 	
 		// Create axis lines
 		chart.selectAll("line")
@@ -301,32 +314,25 @@
 		 chart.selectAll("rect")
 	        .data(data)
 	      .enter().append("svg:rect")
-		
-	        .attr("x", function(d, i) { 
-				//console.log("D: "+d+" I: "+i);
-				return y(i);// * (barwidth + barmargin); 
-			})
+	        .attr("x", function(d, i) { return y(i);})
 			.attr("y", function(d, i) { return cheight - barheight(d); })
 	        .attr("width", y.rangeBand())
 			.attr("stroke", "none")
 			.attr("fill", function(d, i){ 
 				
-				//console.log(parseFloat(jsondata[i].Date));
-				//console.log(d3.range(1989,1999));
-				
-				
-				if(jsondata[i].Date <= 1990) {
-					return '#999';
+				if(jsondata[i].Date < 1990) {
+					return '#CCC';
 				}
 				if(jsondata[i].Date >= 2000) {
 					return 'blue';
 				}
+				
 			})
-			.attr("title", function(d,i){
-				return "Date: "+jsondata[i].Date+" Ratio: "+jsondata[i].Ratio;
-			})
-			.text("Test!")
-			.attr("height", barheight);
+			.attr("height", barheight)
+			.append("svg:title")
+				.text(function(d,i){
+					return "Date: "+jsondata[i].Date+" Ratio: "+jsondata[i].Ratio;
+				});
 			
 		// Create axis labels
 		 chart.selectAll("text.rule")
@@ -340,7 +346,6 @@
 			 .attr("dy", -5)
 		     .attr("text-anchor", "left")
 		     .text(String);
-	        
 	
 </script>
 
