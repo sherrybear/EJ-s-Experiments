@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>Inequality in America</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js" type="text/javascript" charset="utf-8"></script>	
+	
+	<script src="d3.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.chart.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="d3.time.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.layout.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.geom.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
+	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
+	
+	<script src="https://raw.github.com/bigmlcom/tipsy/master/src/javascripts/jquery.tipsy.js" type="text/javascript" charset="utf-8"></script>
+	
+	<link rel="stylesheet" href="tipsy/stylesheets/tipsy.css" type="text/css" media="screen" title="Tipsy" charset="utf-8">
+	
+	
+	<style type="text/css" media="screen">
+		body {
+			font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+		}
+		
+		#container {
+			width: 800px;
+			margin-left: auto;
+			margin-right: auto;
+			padding-left: 25px;
+			padding-right: 25px;
+			background-color: #E0E0E0;
+		}
+		
+		#graph1 {
+			width: 800px;
+			background-color: #CCC;
+		}
+		
+		.chart rect {
+		}
+		
+		.highlight {
+			fill: red;
+		}
+		
+		h3 {
+			margin-left: auto;
+			margin-right: auto;
+			font-size: 48px;
+			text-align: center;
+			padding-top: 20px;
+		}
+	</style>
+	
+	<script src="data.json" type="text/javascript" charset="utf-8"></script>
+	
+</head>
+<body>
+<div id="container">
+	<h3>Tooltip!</h3>
+	<div id="tooltip">
+		
+	</div>
+
+</div>
+
+<script type="text/javascript" charset="utf-8">
+var tooltip = d3.select("#tooltip")
+   .append("svg:svg")
+     .attr("class", "chart")
+	 .attr("width", 800)
+	 .attr("height", 600);
+	
+	tooltip.selectAll("rectangle")
+		.attr("x0", 50 )
+		.attr("x1", 50 )
+		.attr("y0", 100)
+		.attr("y1", 100)
+		.enter();
+</script>
+
+</body>
+</html>
