@@ -13,7 +13,9 @@
 	<script src="d3.layout.js" type="text/javascript" charset="utf-8"></script>
 	<script src="d3.geom.js" type="text/javascript" charset="utf-8"></script>
 	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
-	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
+
+	<script src="quintile.js" type="text/javascript" charset="utf-8"></script>
+	<script src="ceo.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="https://raw.github.com/bigmlcom/tipsy/master/src/javascripts/jquery.tipsy.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -34,11 +36,17 @@
 			background-color: #E0E0E0;
 		}
 		
+        /*
 		#graph1 {
 			width: 800px;
 			background-color: #CCC;
 		}
+        */
 		
+        .background_rect {
+            fill: #CCC;
+        }
+
 		.chart rect {
 		}
 		
@@ -55,10 +63,12 @@
 		}
 	</style>
 	
-	<script src="data.json" type="text/javascript" charset="utf-8"></script>
+	<script src="json_data/quintile.json" type="text/javascript" charset="utf-8"></script>
+	<script src="json_data/ceo_pay.json" type="text/javascript" charset="utf-8"></script>
 	
 	
 	<script type="text/javascript">
+        
     $(document).ready(function() {
       $('svg title').parent().tipsy({
 //      gravity: $.fn.tipsy.autoNS,
@@ -69,139 +79,28 @@
     //    title: function() { return $(this).find('title').text(); }
       });
     });
+
     </script>
+
 </head>
 <body>
 <div id="container">
 	<h3>Ratio of CEO to Employee Pay</h3>
-	<div id="graph1">
-		
-	</div>
-  	
-	<div id="graph2">
-		
-	</div>
-</div>
+
+  </div>
 
 <script type="text/javascript" charset="utf-8">
+
+//Setup svg container in graph div
+var chart = d3.select("#container")
+    .append("svg:svg")
+    .attr("id", "graph")
+    .attr("class", "chart")
+    .attr("width", 800)
+    .attr("height", 1500);
 	
-	$('#graph1').tipsy;
-	var data = [];
-	
-	for (var i=0; i < jsondata.length; i++) {
-		data[i] = parseFloat(jsondata[i].Ratio);
-	};
-	
-	console.log(data);
-	
-	var cwidth = 800;
-	var width = cwidth - (leftmargin + rightmargin);
-	var cheight = 450;
-	var barwidth = 10;
-	var barmargin = 3;
-	var rightmargin = 20;
-	var leftmargin = 50;
-	var topmargin = 10;
-	var ticks = 11;
-	
-	
-	 var chart = d3.select("#graph1")
-	   .append("svg:svg")
-	     .attr("class", "chart")
-		 .attr("width", cwidth)
-		 .attr("height", cheight);
-	
-	 var barheight = d3.scale.linear()
-	     .domain([0, d3.max(data)])
-	     .range([0, cheight-50]);
-	
-	 var barwidthscale = d3.scale.linear()
-	     .domain([0, data.length])
-		
-		
-    y = d3.scale.ordinal()
-		.domain(d3.range(data.length))
-		.rangeBands([leftmargin, cwidth-rightmargin], 0.3);	    
-	
-		// Create axis lines
-		chart.selectAll("line.axisline")
-			.data(barheight.ticks(ticks))
-		.enter().append("svg:line")
-			.attr("class", "axisline")
-			.attr("y1", function(d, i) { return ((cheight - topmargin) - barheight(d)); })
-			.attr("y2", function(d, i) { return ((cheight - topmargin) - barheight(d)); })
-			.attr("x1", leftmargin)
-			.attr("x2", cwidth)
-			.attr("stroke", "#999");
-			
-		// Create axis labels
-		 chart.selectAll("text.rule")
-		     .data(barheight.ticks(ticks))
-		   .enter().append("svg:text")
-		     .attr("class", "rule")
-		     .attr("x", 5)
-	//	     .attr("y", barheight)
-			 .attr("y", function(d, i) { return ((cheight - topmargin) - barheight(d))+4; })
-		     .attr("dx", 12)
-			 .attr("dy", -5)
-		     .attr("text-anchor", "left")
-				.on("mousedown", function(d,i){ color_bars_over(d)})
-				.attr("cursor", "pointer")
-		     .text(String);
-		
-		// Create bars
-		 chart.selectAll("rect")
-	        .data(data)
-	      .enter().append("svg:rect")
-	        .attr("x", function(d, i) { return y(i);})
-			.attr("y", function(d, i) { return ((cheight - topmargin) - barheight(d)); })
-	        .attr("width", y.rangeBand())
-			.attr("stroke", "none")
-			.attr("fill", function(d, i){ 
-				
-				if(jsondata[i].Date < 1990) {
-					return '#7D7D7D';
-				}
-				if(jsondata[i].Date < 2000) {
-					return '#484848';
-				}
-/*				if(jsondata[i].Date >= 2000) {
-					return 'blue';
-				}
-*/				
-			})
-			.attr("id", function(i,d){ return "bar"+d; })
-			.attr("height", barheight)
-			.append("svg:title")
-				.text(function(d,i){
-					return "Date: "+jsondata[i].Date+" Ratio: "+jsondata[i].Ratio;
-				});
-	
-	
-	function color_bars_over(number) {
-		 d3.selectAll("rect").transition()
-	        .duration(700)
-		/*	.attr("fill", function(d, i){ 
-				
-				if(jsondata[i].Ratio < number) {
-					return '#484848';
-				}
-				if(jsondata[i].Ratio >= number) {
-					return 'blue';
-				}
-				
-			});	*/
-			
-			.attr("class", function(d,i){
-				if(jsondata[i].Ratio < number) {
-					return '';
-				}
-				if(jsondata[i].Ratio >= number) {
-					return 'highlight';
-				}
-			});
-			
-	}
+make_quintile(0, 0, 800, 450);	
+make_ceo(0, 470, 800, 450);
 </script>
 
 </body>
