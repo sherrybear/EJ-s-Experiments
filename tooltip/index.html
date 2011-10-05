@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title>Inequality in America</title>
+	<title>Tooltip!</title>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.js" type="text/javascript" charset="utf-8"></script>	
 	
@@ -68,18 +68,19 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-var tooltip = d3.select("#tooltip")
-   .append("svg:svg")
-     .attr("class", "chart")
-	 .attr("width", 800)
-	 .attr("height", 600);
-	
-	tooltip.selectAll("rectangle")
-		.attr("x0", 50 )
-		.attr("x1", 50 )
-		.attr("y0", 100)
-		.attr("y1", 100)
-		.enter();
+var tooltip = d3.select("#tooltip").append("svg:svg")
+        .attr("width", "500").attr("height", "500")
+      .append("svg:rect")
+        .attr("id", "myrectangle")
+        .style("fill", "#999")
+        .attr("width", "150").attr("height", "35");
+
+var text = tooltip.append("svg:text")
+		.text("Test here!")
+		.attr("x", 50)
+		.attr("y", 50)
+		.attr("dy", ".71em")
+		.style("fill", "red");
 </script>
 
 </body>
