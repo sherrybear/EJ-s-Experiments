@@ -37,7 +37,8 @@ var gini = [
     },
     {
         "key": "United States",
-        "value": 45
+        "value": 45,
+        "rank": 39
     },
     {
         "key": "Mexico",

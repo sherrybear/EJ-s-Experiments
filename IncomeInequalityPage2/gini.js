@@ -138,8 +138,8 @@ function make_gini(x, y, cwidth, cheight)
                 //rotate this bitch
                 .text(function(d) { 
                     //console.log(d); 
-                    //return d.key.rank;
-                    return "#137"
+                    return "#" + d.rank;
+                    //return "#137"
                 })
                 .attr("transform", function(d,i) {
                     var bbox = this.getBBox();
