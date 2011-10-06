@@ -2,6 +2,7 @@
 
 function make_ceo(x, y, w, h)
 {
+    console.log("CEO");
 	$('#graph').tipsy;
 	var data = [];
 	
@@ -92,7 +93,7 @@ function make_ceo(x, y, w, h)
                 }
          }
 		// Create bars
-		 chart.selectAll("rect")
+		 chart.selectAll("rect.ceo_bar")
 	        .data(ceo_pay)
 	      .enter().append("svg:rect")
             .attr("class", "ceo_bar")

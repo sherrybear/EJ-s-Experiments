@@ -1,4 +1,4 @@
-[
+var gini = [
     {
         "key": "Sweden",
         "value": 23
@@ -36,7 +36,7 @@
         "value": 41.5
     },
     {
-        "key": "UnitedStates",
+        "key": "United States",
         "value": 45
     },
     {

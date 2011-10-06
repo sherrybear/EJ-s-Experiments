@@ -14,8 +14,15 @@
 	<script src="d3.geom.js" type="text/javascript" charset="utf-8"></script>
 	<script src="d3.geo.js" type="text/javascript" charset="utf-8"></script>
 
+    <!-- data -->
+	<script src="json_data/quintile.json" type="text/javascript" charset="utf-8"></script>
+	<script src="json_data/ceo_pay.json" type="text/javascript" charset="utf-8"></script>
+	<script src="json_data/gini.json" type="text/javascript" charset="utf-8"></script>
+	
+    <!-- charts -->
 	<script src="quintile.js" type="text/javascript" charset="utf-8"></script>
 	<script src="ceo.js" type="text/javascript" charset="utf-8"></script>
+	<script src="gini.js" type="text/javascript" charset="utf-8"></script>
 	
 	<script src="https://raw.github.com/bigmlcom/tipsy/master/src/javascripts/jquery.tipsy.js" type="text/javascript" charset="utf-8"></script>
 	
@@ -63,9 +70,7 @@
 		}
 	</style>
 	
-	<script src="json_data/quintile.json" type="text/javascript" charset="utf-8"></script>
-	<script src="json_data/ceo_pay.json" type="text/javascript" charset="utf-8"></script>
-	
+
 	
 	<script type="text/javascript">
         
@@ -97,10 +102,12 @@ var chart = d3.select("#container")
     .attr("id", "graph")
     .attr("class", "chart")
     .attr("width", 800)
-    .attr("height", 1500);
+    .attr("height", 2000);
 	
 make_quintile(0, 0, 800, 450);	
 make_ceo(0, 470, 800, 450);
+make_gini(0, 940, 800, 450);
+
 </script>
 
 </body>

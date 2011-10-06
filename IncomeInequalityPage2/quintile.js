@@ -2,7 +2,7 @@
 
 function make_quintile(x, y, w, h)
 {
-
+    console.log("QUINTILE");
 	var cwidth = w;
 	var cheight = h;
 	var barwidth = 10;
@@ -94,6 +94,5 @@ function make_quintile(x, y, w, h)
             .attr("stroke-width", 6)
             .attr("fill", "none")
             .attr("d", line);
-
 
 }
