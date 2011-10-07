@@ -5,23 +5,39 @@
 	
 	<!-- the CSS for Smooth Div Scroll -->
 	<link rel="Stylesheet" type="text/css" href="css/smoothDivScroll.css" />
-	
-	<!-- jQuery library - I get it from Google API's -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js" type="text/javascript"></script>
+		
 	<!-- jQuery UI widget factory -->
 	<!-- You can download it as a part of jQuery UI Core
 		 http://jqueryui.com/download -->
-	<script src="js/jquery.ui.widget.js" type="text/javascript"></script>
-	
-	<!-- Smooth Div Scroll 1.1 - minified for faster loading-->
-	<script src="js/jquery.smoothDivScroll-1.1-min.js" type="text/javascript"></script>
+	<script src="js/jquery-1.6.2.min.js" type="text/javascript" charset="utf-8"></script>
+			
+	<script src="jquery.smoothDivScroll-1.2_beta.js" type="text/javascript" charset="utf-8"></script>
 
 	<script type="text/javascript">
-		// Initialize the plugin with no custom options
-		$(window).load(function() {
-			$("div#makeMeScrollable").smoothDivScroll();
-		});
-	</script>
+			$("div#makeMeScrollable").smoothDivScroll({
+				visibleHotSpotBackgrounds: "onstart",
+				hotSpotsVisibleTime: 5000,
+				startAtElementId: "field",
+				mousewheelScrolling: true,
+				mousewheelScrollingStep: 70,
+				easingAfterMouseWheelScrollingDuration: 300,
+				easingAfterMouseWheelScrollingFunction: 'easeOutQuart',
+
+				autoScrollingInterval: 15,
+				autoScrollingStep: 1,
+				autoScrollingMode: "",
+				autoScrollingDirection: "endlessloopright",
+
+				easingAfterHotSpotScrolling: true,
+				easingAfterHotSpotScrollingDistance: 25,
+				easingAfterHotSpotScrollingDuration: 300,
+				easingAfterHotSpotScrollingFunction: 'easeOutQuart',
+
+				hiddenOnStart: false,
+				
+				scrollToEasingDuration: 2000
+			});
+		</script>
 
 	<!-- Styles for my specific scrolling content -->
 	<style type="text/css">
