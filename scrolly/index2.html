@@ -110,7 +110,7 @@
 		#makeMeScrollable
 		{
 			width:100%;
-			height: 800px;
+			height: 400px;
 			position: relative;
 		}
 		
@@ -139,13 +139,12 @@
 		
 		#lifespan {
 			width: 185px;
+			position: relative;
 			float: left;
 			height: 800px;
 		}
 		
 		#scrollbars {
-			width: 100%;
-			float: right;
 		}
 	</style>
 	
@@ -162,20 +161,33 @@
 			<div class="scrollingHotSpotRight"></div>
 			<div class="scrollWrapper">
 				<div class="scrollableArea">
-					<img src="vizchallenge5.jpg" alt="Top">
+					<img src="top.jpg" alt="Top">
 				</div>
 			</div>
 		</div>
 
+		<div id="makeMeScrollable2">
+				<div class="scrollingHotSpotLeft"></div>
+				<div class="scrollingHotSpotRight"></div>
+				<div class="scrollWrapper">
+					<div class="scrollableArea">
+						<img src="bottom.jpg" alt="Bottom">
+					</div>
+				</div>
+			</div>
 	</div>
 	
 	<div style="clear: both;">
 		&nbsp;
 	</div>
 
+<div id="test">
+	xx
 	<script type="text/javascript" charset="utf-8">
-		$("#makeMeScrollable").smoothDivScroll("showHotSpotBackgrounds");		
+		$("#makeMeScrollable").smoothDivScroll("showHotSpotBackgrounds");
+		
 	</script>
+</div>
 
 </body>
 </html>
