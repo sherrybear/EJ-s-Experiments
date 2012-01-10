@@ -27,11 +27,14 @@
 	<script src="https://raw.github.com/bigmlcom/tipsy/master/src/javascripts/jquery.tipsy.js" type="text/javascript" charset="utf-8"></script>
 	
 	<link rel="stylesheet" href="tipsy/stylesheets/tipsy.css" type="text/css" media="screen" title="Tipsy" charset="utf-8">
-	
+	<link href='http://fonts.googleapis.com/css?family=Coustard|Nova+Flat|Rationale' rel='stylesheet' type='text/css'>
+			
 	
 	<style type="text/css" media="screen">
 		body {
-			font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+			font-family: 'Coustard', serif;			
+			background-color: #1A1A1A;
+			color: white;
 		}
 		
 		#container {
@@ -40,7 +43,9 @@
 			margin-right: auto;
 			padding-left: 25px;
 			padding-right: 25px;
-			background-color: #E0E0E0;
+			background-color: #000;
+			border-radius: 7px;
+			border: 15px solid #999;
 		}
 		
         /*
@@ -62,15 +67,26 @@
 		}
 		
 		h3 {
+	/*		font-family: 'Nova Flat', san-serif; */
+			font-family: 'Rationale', sans-serif;			
 			margin-left: auto;
 			margin-right: auto;
 			font-size: 48px;
 			text-align: center;
 			padding-top: 20px;
+			padding-bottom: 20px;
+			background-color: red;
 		}
 	</style>
+<<<<<<< HEAD
 	
 
+=======
+
+	<script src="json_data/quintile.json" type="text/javascript" charset="utf-8"></script>
+	<script src="json_data/ceo_pay.json" type="text/javascript" charset="utf-8"></script>
+	
+>>>>>>> Tried to make Jess' scroll thing… failed.
 	
 	<script type="text/javascript">
         
@@ -91,13 +107,26 @@
 <body>
 <div id="container">
 	<h3>Ratio of CEO to Employee Pay</h3>
+<<<<<<< HEAD
 
 </div>
+=======
+	
+	<div id="introtext">
+		Nullam quis risus eget urna mollis ornare vel eu leo. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Sed posuere consectetur est at lobortis. Donec ullamcorper nulla non metus auctor fringilla.
+	</div>
+	
+	<div id="graph-container">
+		
+	</div>
+	
+  </div>
+>>>>>>> Tried to make Jess' scroll thing… failed.
 
 <script type="text/javascript" charset="utf-8">
 
 //Setup svg container in graph div
-var chart = d3.select("#container")
+var chart = d3.select("#graph-container")
     .append("svg:svg")
     .attr("id", "graph")
     .attr("class", "chart")
@@ -109,6 +138,10 @@ make_ceo(0, 470, 800, 450);
 make_gini(0, 940, 800, 450);
 
 </script>
+
+<div id="name">
+	
+</div>
 
 </body>
 </html>
