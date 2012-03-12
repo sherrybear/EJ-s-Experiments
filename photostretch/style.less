@@ -1,0 +1,410 @@
+/*	Less Framework 4
+	http://lessframework.com
+	by Joni Korpi
+	License: http://opensource.org/licenses/mit-license.php	*/
+
+
+/*	Resets
+	------	*/
+
+/* apply a natural box layout model to all elements */
+/* from http://paulirish.com/2012/box-sizing-border-box-ftw/ */
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+/* maxvoltar.com/archive/-webkit-font-smoothing */
+html { -webkit-font-smoothing: antialiased; }
+
+
+pre {
+	padding: 15px;
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+}
+
+/* hand cursor on clickable input elements */
+label, input[type=button], input[type=submit], button { cursor: pointer; }
+
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, 
+p, blockquote, pre, a, abbr, address, cite, code, del, dfn, em, 
+img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, hr, 
+dl, dt, dd, ol, ul, li, fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figure, figcaption, hgroup, 
+menu, footer, header, nav, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+article, aside, canvas, figure, figure img, figcaption, hgroup,
+footer, header, nav, section, audio, video { display: block; }
+
+a img {border: 0;}
+
+/*	Typography presets
+	------------------	*/
+
+.gigantic {
+	font-size: 116px;
+	line-height: 120px;
+	letter-spacing: -2px;
+}
+
+.huge, h1 {
+	font-size: 72px;
+	line-height: 72px;
+	letter-spacing: -1px;
+}
+
+.large, h2 {
+	font-size: 44px;
+	line-height: 48px;
+}
+
+.bigger, h3 {
+	font-size: 28px;
+	line-height: 36px;
+}
+
+.big, h4 {
+	font-size: 24px;
+	line-height: 30px;
+}
+
+body {
+	font: 17px/24px Palatino, Constantia, "Palatino Linotype", serif;
+}
+
+.small, small {
+	font-size: 13px;
+	line-height: 18px;
+}
+
+.border-radius (@radius) {
+  border-radius: @radius;
+  -moz-border-radius: @radius;
+  -webkit-border-radius: @radius;
+}
+
+/*	Column class / mixins 
+	---------------------	*/
+
+.1-column { width:  68px;   }
+.2-column { width: 160px;  }
+.3-column { width: 252px;  }
+.4-column { width: 344px;  }
+.5-column { width: 436px;  }
+.6-column { width: 528px;  }
+.7-column { width: 620px;  }
+.8-column { width: 712px;  }
+.9-column { width: 804px;  }
+.10-column {width: 896px; }
+
+
+/*	Color variables
+	------------------	*/
+/* Highlight color, when user selects text */
+@highlight: #DDE97E;
+
+/* Link color, hover/visited will be generated from this */
+@linkcolor: #286C99;
+	
+
+/* Selection colours (easy to forget) */
+
+::selection 	 	{background: @highlight;}
+::-moz-selection 	{background: @highlight;}
+img::selection 		{background: transparent;}
+img::-moz-selection	{background: transparent;}
+body {-webkit-tap-highlight-color: @highlight;}
+
+
+/*		Default Layout: 992px. 
+		Gutters: 24px.
+		Outer margins: 48px.
+		Leftover space for scrollbars @1024px: 32px.
+-------------------------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8      9      10
+px      68    160    252    344    436    528    620    712    804    896    */
+
+body {
+	background: black;
+	color: white;
+	-webkit-text-size-adjust: 100%; /* Stops Mobile Safari from auto-adjusting font-sizes */
+}
+#navigation {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+#title {
+	padding-left: 160px;
+	padding-right: 160px;
+	text-align: center;
+}
+#section-1 {
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 700px;
+	background: url('http://farm8.staticflickr.com/7012/6746224785_c7df7c2242_o.jpg') center center fixed;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	padding-top: 24px;
+	
+	p {
+	/*	background-color: black; */
+		background-color: rgba(0,0,0,0.92);
+		border-radius: 4px;
+		display: block;
+		width: 252px;
+		padding: 18px;
+		margin-top: 100px;
+		a:link, a:hover, a:visited {
+			color: #6FC1E8;
+		}
+		
+	h3 {
+		text-shadow: 0 3px 1px rgba(0,0,0,0.9);
+		
+	}
+	}
+	
+	
+}
+#section-2 {
+	width: 100%;
+	margin-left: auto; margin-right: auto;
+/*	http://farm8.staticflickr.com/7021/6751046567_386c75712f_o.jpg */
+
+	height: 900px;
+	background: url('http://farm8.staticflickr.com/7155/6494508513_f058c12ded_o.jpg') top center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	p {
+		background-color: black;
+		border-radius: 4px;
+		display: block;
+		width: 252px;
+		padding: 18px;
+	}
+	h2 {
+		color: black;
+		padding-top: 12px; padding-bottom: 12px;
+		background-color: rgba(255,255,255,0.7);
+		text-align: center;
+	}
+}
+
+#section-3 {
+	border-top: 10px solid black;
+	border-bottom: 10px solid black;
+	
+	width: 100%;
+	height: 600px;
+	
+/*	http://farm8.staticflickr.com/7172/6750997693_d8893c1967_o.jpg */
+	background: url('http://farm8.staticflickr.com/7165/6746225441_1ca27e0e44_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	p {
+		margin-top: 100px;
+		width: 27%;
+		margin-left: 10%;
+		text-shadow: 0 2px 3px #000;
+		padding: 3%;
+		background-color: rgba(0,0,0,0.3)
+	}
+	h3 {
+		font-size: 92px;
+		margin-top: -25px;
+	}
+}
+
+#section-4 {
+	width: 100%;
+	height: 600px;
+	
+	/* http://farm8.staticflickr.com/7026/6494529483_a2a50906a6_o.jpg */
+	
+	background: url('http://farm8.staticflickr.com/7144/6494527137_cba6ab1fb7_o.jpg') center left fixed;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	h3 {
+		padding-top: 2%;
+		margin-left: 6%;
+	}
+}
+
+#section-5 {
+	width: 100%;
+	height: 600px;
+	
+	/* http://farm8.staticflickr.com/7026/6494529483_a2a50906a6_o.jpg */
+	border-top: 10px solid black;
+	background: url('http://farm8.staticflickr.com/7146/6494521673_4fedfec096_o.jpg') center center fixed;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+
+	
+	h3 {
+		padding-top: 12px; padding-bottom: 12px;
+		background-color: rgba(0,0,0,0.7);
+		text-align: center;
+	}
+}
+
+#section-6 {
+	width: 100%;
+	height: 800px;
+	
+	border-top: 10px solid black;
+	background: url('http://farm8.staticflickr.com/7151/6494519501_f9b0f67eed_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	
+	h3 {
+		color: black;
+		padding-top: 2%;
+		margin-left: 6%;
+	}
+}
+#section-7 {
+	/* http://farm8.staticflickr.com/7152/6494446823_b82cc32f3d_o.jpg */
+	
+	width: 100%;
+	height: 800px;
+	
+	border-top: 10px solid black;
+	background: url('http://farm8.staticflickr.com/7152/6494446823_b82cc32f3d_o.jpg') center center scroll;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+
+
+a {
+	&:link{
+		color: @linkcolor;
+	}
+	&:hover {
+		@darklinkcolor: darken(@linkcolor, 17%);
+		color: @darklinkcolor;
+	 	-webkit-transition:  0.3s linear;
+	}
+	&:visited {
+		@darklinkcolor: darken(@linkcolor, 25%);
+		color: @darklinkcolor;
+	}
+}
+#content {
+	.5-column;
+}
+
+
+
+/*		Tablet Layout: 768px.
+		Gutters: 24px.
+		Outer margins: 28px.
+		Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+	
+	body {
+		width: 712px;
+		padding: 48px 28px 60px;
+	}
+}
+
+
+
+/*		Mobile Layout: 320px.
+		Gutters: 24px.
+		Outer margins: 34px.
+		Inherits styles from: Default Layout.
+---------------------------------------------
+cols    1     2      3
+px      68    160    252    */
+
+@media only screen and (max-width: 767px) {
+	
+	body {
+		font-size: 12px;
+		line-height: 1.3em;
+		width: 320px;
+	}
+	
+	h1 {
+		font-size: 34px;
+		line-height: 1.2em;
+	}
+	
+	#section-1 {
+		background: url('http://farm8.staticflickr.com/7012/6746224785_c7df7c2242_o.jpg') center right fixed;		
+	}
+	#section-2 {
+		p {
+			margin-top: 200px;
+		}
+		h3 {
+			font-size: 18px;
+		}
+		width: 100%;
+		height: 600px;
+	}
+	
+	
+}
+
+
+
+/*		Wide Mobile Layout: 480px.
+		Gutters: 24px.
+		Outer margins: 22px.
+		Inherits styles from: Default Layout, Mobile Layout.
+------------------------------------------------------------
+cols    1     2      3      4      5
+px      68    160    252    344    436    */
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+	
+	body {
+		width: 436px;
+		padding: 36px 22px 48px;
+	}
+	#section-1 {
+		background: url('http://farm8.staticflickr.com/7012/6746224785_c7df7c2242_o.jpg') center center fixed;		
+		
+
+	}
+}
