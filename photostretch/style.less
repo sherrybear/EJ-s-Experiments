@@ -110,7 +110,7 @@ body {
 @highlight: #DDE97E;
 
 /* Link color, hover/visited will be generated from this */
-@linkcolor: #286C99;
+@linkcolor: #6FC1E8;
 	
 
 /* Selection colours (easy to forget) */
@@ -141,9 +141,12 @@ body {
 	right: 0;
 }
 #title {
+	padding-top: 25px;
 	padding-left: 160px;
 	padding-right: 160px;
 	text-align: center;
+	text-shadow: 0 1px 5px #000;
+	
 }
 #section-1 {
 	margin-left: auto;
@@ -157,12 +160,13 @@ body {
 	-o-background-size: cover;
 	background-size: cover;
 	padding-top: 24px;
+	position: relative;
 	
 	p {
 	/*	background-color: black; */
 		background-color: rgba(0,0,0,0.92);
 		border-radius: 4px;
-		display: block;
+/*		display: block; */
 		width: 252px;
 		padding: 18px;
 		margin-top: 100px;
@@ -184,7 +188,7 @@ body {
 /*	http://farm8.staticflickr.com/7021/6751046567_386c75712f_o.jpg */
 
 	height: 900px;
-	background: url('http://farm8.staticflickr.com/7155/6494508513_f058c12ded_o.jpg') top center scroll;
+	background: url('http://farm8.staticflickr.com/7152/6494446823_b82cc32f3d_o.jpg') center center scroll;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -192,11 +196,25 @@ body {
 	background-size: cover;
 	
 	p {
+		font-size: 14px;
+		line-height: 1.4em;
 		background-color: black;
 		border-radius: 4px;
 		display: block;
-		width: 252px;
-		padding: 18px;
+		width: 280px;
+		padding: 24px 18px;
+		
+		position: absolute;
+		right: 0;
+		
+		img {
+			border: 2px solid rgba(255,255,255,0.5);
+			margin-top: 8px;
+			margin-bottom: 8px;
+			margin-right: auto;
+			margin-left: auto;
+			display: block;
+		}
 	}
 	h2 {
 		color: black;
@@ -214,7 +232,7 @@ body {
 	height: 600px;
 	
 /*	http://farm8.staticflickr.com/7172/6750997693_d8893c1967_o.jpg */
-	background: url('http://farm8.staticflickr.com/7165/6746225441_1ca27e0e44_o.jpg') center center scroll;
+	background: url('http://farm8.staticflickr.com/7155/6494508513_f058c12ded_o.jpg') center center scroll;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -227,10 +245,12 @@ body {
 		margin-left: 10%;
 		text-shadow: 0 2px 3px #000;
 		padding: 3%;
-		background-color: rgba(0,0,0,0.3)
+		background-color: rgba(0,0,0,0.5)
 	}
 	h3 {
-		font-size: 92px;
+		font-size: 72px;
+		text-shadow: 0 1px 5px #000;
+		
 		margin-top: -25px;
 	}
 }
@@ -250,7 +270,11 @@ body {
 	
 	h3 {
 		padding-top: 2%;
-		margin-left: 6%;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+		text-shadow: 0 1px 5px #000;
+		
 	}
 }
 
@@ -260,7 +284,7 @@ body {
 	
 	/* http://farm8.staticflickr.com/7026/6494529483_a2a50906a6_o.jpg */
 	border-top: 10px solid black;
-	background: url('http://farm8.staticflickr.com/7146/6494521673_4fedfec096_o.jpg') center center fixed;
+	background: url('http://farm8.staticflickr.com/7022/6494515489_3010ded15e_o.jpg') center center fixed;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
