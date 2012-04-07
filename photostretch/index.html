@@ -30,11 +30,15 @@
 	<script src="js/jquery.lettering.js" type="text/javascript" charset="utf-8"></script>
 	
 	<!-- And smooth scrolling | from http://css-tricks.com/snippets/jquery/smooth-scrolling/ -->			
-<!--	<script src="js/smooth_scrolling.js" type="text/javascript" charset="utf-8"></script> -->
+	<script src="js/smooth_scrolling.js" type="text/javascript" charset="utf-8"></script>
 	
 	<!-- And Scrollorama | http://johnpolacek.github.com/scrollorama/ -->			
 	<script src="js/jquery.scrollorama.js" type="text/javascript" charset="utf-8"></script>
 	
+	
+	<!-- And Timeline | https://github.com/VeriteCo/Timeline-->
+	<script src="js/timeline-min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="timeline.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	
 	
 	<!-- Additional D3 libraries which we may or may not need
@@ -48,6 +52,9 @@
 	<script src="js/leaflet.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/wax.leaf.min.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="leaflet.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link href='http://fonts.googleapis.com/css?family=Squada+One' rel='stylesheet' type='text/css'>
+	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js"></script>
+	
 	
 </head>
 <body>
@@ -60,7 +67,7 @@
 		</div>
 		
 		<p class="animated bounceInLeft">
-		I moved to Oakland around the same time Occupy Oakland first established camp in the open plaza in front of City Hall, flanking the historic Oak tree. I fell in love with the spirit of the occupiers pretty quickly, but I was probably as predisposed to as anyone. What I didn't expect was how eagerly and viciously <a href="#content-2">the cops</a> rose to take the position of villian.
+		I moved to Oakland around the same time Occupy Oakland first established camp in the open plaza in front of City Hall, flanking the historic Oak tree. I fell in love with the spirit of the occupiers pretty quickly, but I was probably as predisposed to as anyone. What I didn't expect was how eagerly and viciously <a href="#section-3">the cops</a> rose to take the position of villian.
 		</p>
 	</div>
 	
@@ -87,30 +94,61 @@
 	</div>
 	
 	<div id="section-5" class="section">
-		<h3>And another</h3>
+		<h3>The idea here</h3>
 		<p>
-			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			The idea here is to create some sort of template to try and tell video/audio/infographic stories all in one cohesive, responsive page.
 		</p>
 	</div>
 	
 	<div id="section-6" class="section">
-		<h3>And another</h3>
+				<div class="video-container">
+		<iframe src="http://player.vimeo.com/video/36256273?byline=0&amp;portrait=0&amp;color=ffffff" width="250" height="141" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>		
+				</div>
 	</div>
 	
 	<div id="section-7" class="section">
-		<h3>And another</h3>
+<!--		<h3>And another</h3> -->
 	</div>
 	
 	<div id="section-8" class="section">
-	   <h3>Now a map</h3>
+	   <h3>Now an interactive map</h3>
 	   <div id="mapbox" style="width:100%; height: 100%;">
 	       
 	   </div>
 	</div>
+	
+
+	
+	<div id="section-9" class="section">
+		<h3>Here's some audio?</h3>
+		<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F37934185&amp;auto_play=false&amp;show_artwork=false&amp;color=000000"></iframe>
+
+	</div>
+	
+<div id="section-10" class="section">
+	<h3>Here's some other stuff!</h3>
+
 </div>
+
+<div id="section-11" class="section">
+	<div id="timeline"></div>
+	
+</div>
+
+<div id="section-12" class="section">
+	<h3>Here's some other stuff!</h3>
+
+</div>
+
 <script type="text/javascript" charset="utf-8">
 	
 	$(document).ready(function(){
+		
+		// Init timeline https://github.com/VeriteCo/Timeline
+	
+		timeline = new VMM.Timeline(); timeline.init("https://docs.google.com/spreadsheet/pub?key=0ApAkxBfw1JT4dExOOVg4b29FWG5nOURTLTlCbDhsTVE&output=html");
+		
+	
 		
 		// Initialize scrollorama for all elements with
 		// the class of "section"
@@ -140,11 +178,14 @@
 	});
 	
 </script>
+<!-- <script src="js/oo_map.js" type="text/javascript" charset="utf-8"></script> -->
+
 
 <script type="text/javascript">
 
 // Define a geojson data layer
 var geojsonLayer = new L.GeoJSON(data);
+var stamenLayer = new L.StamenTileLayer("toner");
 
 // Define the map to use from MapBox
 var url = 'http://api.tiles.mapbox.com/v3/mapbox.mapbox-streets.jsonp';
@@ -152,19 +193,23 @@ var url = 'http://api.tiles.mapbox.com/v3/mapbox.mapbox-streets.jsonp';
 // Get metadata about the map from MapBox
 wax.tilejson(url,function(tilejson) {
 
+
+
     // Make a new Leaflet map in your container div
     var map = new L.Map('mapbox', {
-        zoomControl: false
+        zoomControl: false,
+		scrollWheelZoom: false
     })  // container's id="mapbox"
 
+
     // Center the map
-    .setView(new L.LatLng(37.808, -122.272), 15)
+    .setView(new L.LatLng(37.80548, -122.27193), 17)
 	
     // Add MapBox Streets as a base layer
     .addLayer(new wax.leaf.connector(tilejson))
 
     // Add the geojson layer
-    .addLayer(geojsonLayer);
+    .addLayer(stamenLayer);
 
 	map.on('click', onMapClick);
 
@@ -172,6 +217,7 @@ wax.tilejson(url,function(tilejson) {
 	    $('body').append("You clicked the map at " + e.latlng+"<br>");
 	}
 	
+	/*
 	var circleLocation = new L.LatLng(37.80548, -122.27193),
 	    circleOptions = {
 	        color: '#464D2E',
@@ -181,6 +227,37 @@ wax.tilejson(url,function(tilejson) {
 
 	var circle = new L.Circle(circleLocation, 25, circleOptions);
 	map.addLayer(circle);
+	*/
+	
+	var fo_p1 = new L.LatLng(37.8044, -122.27123),
+	    fo_p2 = new L.LatLng(37.80594, -122.27179),
+	    fo_p3 = new L.LatLng(37.8049, -122.27247),
+	    fo_polygonPoints = [fo_p1, fo_p2, fo_p3];
+
+	var frankogawa = new L.Polygon(fo_polygonPoints, {
+		fill: "white",
+		color: "red",
+		weight: 8
+	});
+	map.addLayer(frankogawa);	
+	frankogawa.bindPopup("Frank Ogawa Plaza, where the OccupyOakland encampment is.");
+
+	var nt_p1 = new L.LatLng(37.80857, -122.27092),
+	    nt_p2 = new L.LatLng(37.80905, -122.27079),
+	    nt_p3 = new L.LatLng(37.80913, -122.27134),
+	    nt_p4 = new L.LatLng(37.80865, -122.27147),	
+	    nt_polygonPoints = [nt_p1, nt_p2, nt_p3, nt_p4];
+
+	var nineteen_telegraph = new L.Polygon(nt_polygonPoints, {
+		fill: "white",
+		color: "red",
+		weight: 8
+	});
+	map.addLayer(nineteen_telegraph);	
+	nineteen_telegraph.bindPopup("19th and Telegraph, where Sunday GAs are held");
+	
+	
+	
 
     // Display the name property on click
     geojsonLayer.on("featureparse", function (e) {
@@ -193,5 +270,7 @@ wax.tilejson(url,function(tilejson) {
     geojsonLayer.addGeoJSON(data);
 });
 </script>
+
+
 </body>
 </html>
