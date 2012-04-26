@@ -58,12 +58,26 @@
 	
 </head>
 <body>
+<div id="navbar">
+<div id="extrainfo">
+	<h2>Occupy Oakland</h2>
+	This is an example/experiment in creating a template/format for long-form stories that combine a variety of media, including photos from Flickr, audio from Soundcloud, video from Vimeo, and maps with Leaflet. 
+	
+	<br /><br />This example focuses on media I've collected on Occupy Oakland, but I would like to make it general enough to apply to any story. I've mocked up my ideal <a href="http://cloud.ejfox.com/G3Iq">backend for this type of site in balsamiq</a>, I'd love to hear your feedback. You can email me at ejfox@ejfox.com
+
+		
+</div>
+<ul id="navlist">
+	<li id="moreinfo"><span id="moreinfotext">More info</span> <span id="triangle">&#9654</span></li>
+</ul>
+</div>
 <div id="container">
 
 	
 	<div id="section-1" class="section">
 		<div id="title">
 			<h1 class="animated fadeInDown">Occupy Oakland</h1>
+			<h2>The beginning</h2>
 		</div>
 		
 		<p class="animated bounceInLeft">
@@ -82,7 +96,7 @@
 	</div>
 	
 	<div id="section-3" class="section">
-		<h3>The biggest gang in Oakland</h3>
+		<h2>The biggest gang in Oakland</h2>
 		<p><em>A recurring theme in the comments by those speaking against the injunction was the reference to the Oakland Police Department as “the largest gang in this city.”  One Fruitvale resident who expressed concerns about safety issues in the city said she would “not support the OPD doing anything until they clean up their own act.”</em>
 			<br /><a href="http://oaklandnorth.net/2011/02/23/city-officials-and-public-weigh-in-on-proposed-gang-injunction/">-Public Weighs in on proposed gang injunctions</a>
 
@@ -94,13 +108,11 @@
 	</div>
 	
 	<div id="section-5" class="section">
-		<h3>The idea here</h3>
-		<p>
-			The idea here is to create some sort of template to try and tell video/audio/infographic stories all in one cohesive, responsive page.
-		</p>
+
 	</div>
 	
 	<div id="section-6" class="section">
+		<h2>Vimeo</h2>
 				<div class="video-container">
 		<iframe src="http://player.vimeo.com/video/36256273?byline=0&amp;portrait=0&amp;color=ffffff" width="250" height="141" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>		
 				</div>
@@ -111,7 +123,7 @@
 	</div>
 	
 	<div id="section-8" class="section">
-	   <h3>Now an interactive map</h3>
+	   <h2>Map</h2>
 	   <div id="mapbox" style="width:100%; height: 100%;">
 	       
 	   </div>
@@ -120,29 +132,57 @@
 
 	
 	<div id="section-9" class="section">
-		<h3>Here's some audio?</h3>
+		<h2>Soundcloud</h2>
 		<iframe width="100%" height="166" scrolling="no" frameborder="no" src="http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F37934185&amp;auto_play=false&amp;show_artwork=false&amp;color=000000"></iframe>
 
 	</div>
 	
 <div id="section-10" class="section">
-	<h3>Here's some other stuff!</h3>
+	<p>
+	"It felt other-worldly, as if some military force had descended on my neighborhood ready for war. This was in sharp and clear contrast to the calm party &amp; community atmosphere that Occupy had began to waft over my newly-adopted neighborhood. I moved into my apartment right around the time Occupiers moved into the park a mere 2 blocks from where I lived. These were the first people I met here, my real neighbors, people who were helping each other by keeping books for everyone to read or food for everyone to eat. And here were these police determined to use their weapons on them, suiting up on a street I walk on every day. I had not been totally convinced by the attitude of Occupy Oakland before the raid, they seemed more determined to blast music and dance then change the world. But I knew as I watched this cop suit up, grabbing as many cans of tear gas or whatever he could, who was the force for good in my community and who wasn't."	
+	<br />
+	<span class="readmore">
+		<a href="http://cowbird.com/author/ej-fox/stories/#!/3729">Read more on Cowbird</a>
+	</span>
+	</p>
 
 </div>
 
 <div id="section-11" class="section">
+	<h2>Timeline</h2>
 	<div id="timeline"></div>
 	
 </div>
 
+<!--
 <div id="section-12" class="section">
 	<h3>Here's some other stuff!</h3>
 
 </div>
+-->
+
 
 <script type="text/javascript" charset="utf-8">
 	
 	$(document).ready(function(){
+		
+		$('#moreinfo').click(function(){		
+			if(!$(this).hasClass("open")){
+				$("#navbar").addClass("showextra");
+
+				$(this).addClass("open");
+				
+				$('#triangle').addClass("rotate");
+				$('#moreinfotext').text("Less info");
+			}
+			else {
+				$("#navbar").removeClass("showextra")
+				$(this).removeClass("open");
+				$('#triangle').removeClass("rotate");
+				$('#moreinfotext').text("More info");
+			}
+
+		});
 		
 		// Init timeline https://github.com/VeriteCo/Timeline
 	
@@ -150,29 +190,44 @@
 		
 	
 		
+		// Split h1 into words 
+		// for more specific styling
+		$("#title h1").lettering('words');
+		
+		
 		// Initialize scrollorama for all elements with
 		// the class of "section"
 		var scrollorama = $.scrollorama({
-			blocks: '.section'
+			blocks: '.section',
+			enablePin:false
 		});
 		
 		scrollorama.onBlockChange(function(){
 				var i=scrollorama.blockIndex;
 				console.log(i);
+				$('.navlink').removeClass("currentsection")
+				$("#navbar #navlink"+i).addClass("currentsection")
 				
-				if (i==1) {
-/*					$('#section-2 p').addClass('animated fadeInLeft'); */
-					
-				};
-				if (i == 2) {
-/*					$('#section-3 p').addClass('animated swing') */
-				}
+				
 		});
+
+		var sections = [];
 		
+		$('.section').each(function(i,d) {
+//			console.log("I,D",i,d)
+//			console.log("D",$(d).attr('id'));
+			
+			var sectionname = $('#'+$(d).attr('id')+" h2").text() || "Part "+(i+1);
+			
+			var section = $('<li class="navlink" id="navlink'+i+'"><img src="skip_forward.png"> <a href="#'+$(d).attr('id')+'">'+sectionname+'</a></li>');
+			
+			$('#navlist').append(section);
+			sections.push(section)
+		})
 		
-		// Split h1 into words 
-		// for more specific styling
-		$("#title h1").lettering('words');		
+		console.log("Sections =>",sections)
+		
+		smoothScrolling();
 		
 		
 	});
@@ -270,6 +325,9 @@ wax.tilejson(url,function(tilejson) {
     geojsonLayer.addGeoJSON(data);
 });
 </script>
+
+
+<script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
 
 
 </body>
